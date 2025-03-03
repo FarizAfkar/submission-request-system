@@ -1,0 +1,342 @@
+{% load static %}
+
+<!doctype html>
+<html>
+
+    <head>
+
+        <meta charset="utf-8">
+
+        <title>{{title}}</title>
+
+        <style type="text/css">
+            /* ========== Setting Page ========== */
+            @page {
+                size: A4;
+                margin-top: 1cm;
+                margin-left: 0.25cm;
+                margin-right: 0.25cm;
+                margin-bottom: 1cm;
+            }
+            /* ========== End Setting Page ========== */
+
+            /* ========== Header ========== */
+            .header {
+                font-family:'Times New Roman', Times, serif;
+                margin-top: 100px;
+                margin-bottom: 20px;
+            }
+
+            .header-table {
+                text-align: center;
+            }
+
+            .header-left span {
+                font-size: 12px;
+            }
+
+            .header-right span {
+                font-size: 12px;
+            }
+
+            .header-img {
+                width: 100px;
+            }
+            /* ========== End Header ========== */
+
+            /* ========== Register ========== */
+            .register {
+                font-size:12px;
+                font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                margin-top: 20px;
+                margin-bottom: 20px;
+                margin-left: 80px;
+                margin-right: 80px;
+            }
+
+            .register-detail {
+                text-align: right;
+                margin-bottom: 0px;
+                line-height: 80%;
+            }
+
+            .register-detail-2 {
+                text-align: right;
+                font-size: 10.5px;
+                margin-top: 0px;
+                line-height: 80%;
+            }
+            /* ========== End Register ========== */
+
+            /* ========== Title ========== */
+            .title {
+                font-size:12px;
+                font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                margin-top: 20px;
+                margin-bottom: 20px;
+                margin-left: 80px;
+                margin-right: 80px;
+                line-height: 110%;
+            }
+
+            .title-detail {
+                text-align: center;
+                line-height: 110%;
+            }
+            /* ========== End Title ========== */
+
+            /* ========== Opening ========== */
+            .opening {
+                font-size:12px;
+                font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                margin-top: 20px;
+                margin-bottom: 20px;
+                margin-left: 80px;
+                margin-right: 80px;
+            }
+
+            .opening-detail {
+                text-align: justify;
+                text-indent: 50px;
+            }
+            /* ========== End Opening ========== */
+
+            /* ========== Content ========== */
+            .content {
+                font-size:12px;
+                font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+
+            .content-table tr td {
+                border: 0px solid black;
+                vertical-align: top;
+                text-align: justify;
+            }
+
+            .content-number {
+                width: 15px;
+                padding-left: 40px;
+            }
+
+            .content-key {
+                width: 300px;
+                padding-left: 45px;
+            }
+
+            .content-sparator {
+                width: 15px;
+                padding-left: 40px;
+            }
+
+            .content-value {
+                width: 500px;
+                padding-left: 40px;
+                padding-right: 40px;
+                padding-bottom:5px;
+            }
+            /* ========== End Content ========== */
+
+            /* ========== Signature ========== */
+            .signature {
+                font-size:12px;
+                font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                margin-top: 20px;
+                margin-bottom: 20px;
+                margin-left: 80px;
+                margin-right: 80px;
+                text-align: center;
+                padding-left: 300px;
+            }
+
+            .signature-date {
+                margin: 50px;
+            }
+
+            .signature-name {
+                margin-top: 70px;
+                margin-bottom: 50px;
+            }
+            /* ========== End Signature ========== */
+
+            /* ========== CC ========== */
+            .cc {
+                font-size:12px;
+                font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+
+            .cc-table tr td{
+                border: 0px solid black;
+                vertical-align:baseline;
+                margin-left: 80px;
+            }
+
+            .cc-key {
+                width: 20px;
+            }
+
+            .cc-sparator {
+                width: 20px;
+            }
+
+            .cc-value {
+                width: 600px;
+            }
+            /* ========== End CC ========== */
+        </style>
+
+    </head>
+
+    <body>
+        <!-- Header -->
+        <div class="header">
+            <table class="header-table">
+                <tr>
+                    <td>
+                        <p class="header-left">
+                            <span>K</span>Ut amet <span>B</span>Eget <span>R</span>Egestas <span>I</span>Ut justo <br>
+                            <span>E</span>In sed nullam <span>R</span>Erat curae <span>I</span>Ut justo  <br>
+                            <span>W</span>Etiam nam, <span>D.C.</span> XXXXX <br>
+                            <span>T</span>EL.: (XXX) XXX-XXXX <span>F</span>AX: (XXX) XXX-XXX <br>
+                        </p>
+                    </td>
+                    <td style="width: 210px;">
+                        <img class="header-img" src="http://127.0.0.1:8000/static/dashboards/images/pancasila.png"/>
+                    </td>
+                    <td>
+                        <p class="header-right">
+                            <span>A</span>Eget <span>P</span>Nunc proin <br>
+                            <span>T</span>HE <span>C</span>Proin non <span>A</span>Libero <br>
+                            2020 <span>M</span>Maecenas nam <span>A</span>Augue, <span>N.W.</span> <br>
+                            <span>T</span>EL.: (XXX) XXX-XXXX <span>F</span>AX: (XXX) XXX-XXXX <br>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Register -->
+        <div class="register">
+            <p class="register-detail">
+                <u>{{trans.renewal_type | upper}} Nulla lectus</u><br>
+                <p class="register-detail-2">PREV.# XX/XXXXX-XXX/X/XXXX</p>
+            </p>
+        </div>
+
+        <!-- Title -->
+        <div class="title">
+            <p class="title-detail">
+                <u><strong>Integer nec commodo in</strong></u> <br>
+                NO.: XXX/XXXXX-XXX/X/XXXX
+            </p>
+        </div>
+
+        <!-- Opening -->
+        <div class="opening">
+            <p class="opening-detail">
+                Nullam lorem leo, elementum sed dolor non, fringilla scelerisque tortor. Nunc tincidunt tellus
+                XX/XXXX/XXX/X/XXXX dated March 29<sup>th</sup>, 2006 Aliquam ornare cursus elit consequat aenean No. XX/X-XXX/XXX/X/XXXX
+                dated June 24<sup>th</sup>, 2010, Curabitur pulvinar venenatis mollis. Nullam id ligula augue. Curabitur rutrum eu quam ut mi
+                Sed id viverra tellus, vitae malesuada ipsum. Nulla in venenatis eros:
+            </p>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <table class="content-table">
+                <tr>
+                    <td class="content-number">1.</td>
+                    <td class="content-key">Name of Company</td>
+                    <td class="content-sparator">:</td>
+                    <td class="content-value"><strong>{{trans.comp_us_name}}</strong> </td>
+                </tr>
+
+                <tr>
+                    <td class="content-number">2.</td>
+                    <td class="content-key">Headquarters’ Address</td>
+                    <td class="content-sparator">:</td>
+                    <td class="content-value">
+                        {{trans.comp_us_address}} <br>
+                        {{trans.comp_us_city}}, {{trans.comp_us_state}} {{trans.comp_us_zip}} – XA <br>
+                        Tel.: {{trans.comp_us_phone}}; Fax: {{trans.comp_us_fax}} <br>
+                        Website: {{trans.comp_us_website}} <br>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="content-number">3.</td>
+                    <td class="content-key">Legal form/status</td>
+                    <td class="content-sparator">:</td>
+                    <td class="content-value">{{trans.comp_us_legal_status}}</td>
+                </tr>
+
+                <tr>
+                    <td class="content-number">4.</td>
+                    <td class="content-key">Year of Establishment</td>
+                    <td class="content-sparator">:</td>
+                    <td class="content-value">{{trans.comp_us_establishment}}</td>
+                </tr>
+                    <td class="content-number">5.</td>
+                    <td class="content-key">Name of Representative Officer and Office Address in XB</td>
+                    <td class="content-sparator">:</td>
+                    <td class="content-value">
+                        <strong>{{trans.comp_idn_rep_officer}}</strong>  <br>
+                        {{trans.comp_idn_nationality}} ID # {{trans.comp_idn_idnumber}} <br>
+                        {{trans.comp_idn_address}} <br>
+                        {{trans.comp_idn_city}}, {{trans.comp_idn_province}} {{trans.comp_idn_zip}} – XB <br>
+                        Tel.: +62-816-103045 <br>
+                    </td>
+                <tr>
+                    <td class="content-number">6.</td>
+                    <td class="content-key">Activity</td>
+                    <td class="content-sparator">:</td>
+                    <td class="content-value">
+                        {{trans_activity_1}}<br>
+                        {{trans_activity_2}}
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td class="content-number">7.</td>
+                    <td class="content-key">Term of Appointment</td>
+                    <td class="content-sparator">:</td>
+                    <td class="content-value">{{trans.term}} {{trans.term_unit}}.</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Signature -->
+        <div class="signature">
+            <p class="signature-date">
+                Aliquam ligula, {{ trans.approval_date | date:'M d, Y' }} <br>
+                Nullam turpis duis
+            </p>
+            <p class="signature-name">
+                {{trans.approval_name}}
+            </p>
+        </div>
+
+        <!-- CC -->
+        <div class="cc">
+            <table class="cc-table">
+                <tr>
+                    <td class="cc-key">CC</td>
+                    <td class="cc-sparator">:</td>
+                    <td class="cc-value">1. Fusce rutrum, justo sit amet porta rutrum, magna donec; </td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td class="cc-value">2. Sed id tempor nisl. Ut hendrerit, ligula eu accumsan quam.</td>
+                </tr>
+            </table>
+        </div>
+
+    </body>
+
+</html>

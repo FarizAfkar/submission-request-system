@@ -1,0 +1,105 @@
+{% extends 'transactions/base-transactions.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %} {{ title }} {% endblock title %}
+
+{% block content %}
+
+	<!-- Main jumbotron for a primary marketing message or call to action -->
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item active" aria-current="page">Home</li>
+		</ol>
+	</nav>
+
+	<div class="container">
+		<!-- Renewal type -->
+		<div class="row">
+			<div class="col-md-12">
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item">
+							<a href="{% url 'portalpages:home' %}">Home</a>
+						</li>
+						<li class="breadcrumb-item active" aria-current="page">
+							{% block menu %} {{ title }} {% endblock menu %}
+						</li>
+					</ol>
+				</nav>
+
+        {% include 'messages.html'%}
+
+				<div class="my-3 p-3 bg-white rounded shadow-sm">
+
+					<div class="track">
+						<div class="step"> <span class="icon"> <i class="fas fa-globe-asia"></i> </span> <span class="text">Company in XA</span> </div>
+						<div class="step"> <span class="icon"> <i class="fas fa-globe-asia"></i> </span> <span class="text">Company in XB</span> </div>
+						<div class="step"> <span class="icon"> <i class="fa fa-address-card"></i> </span> <span class="text">Applicant Detail</span> </div>
+					</div>
+
+					<h2 class="border-bottom border-gray pb-2 mb-0">
+					<center>{% block form_title %}{{ form_title }}{% endblock form_title %}</center>
+					</h2><br>
+
+					<p><b>{% block form_desc_title %}{{ form_desc_title }}{% endblock form_desc_title %}</b></p>
+
+					<form method="POST" class="post-form form-horizontal" enctype="multipart/form-data">
+						{% csrf_token %}
+
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="card text-center">
+									<div class="card-body">
+										<h5 class="card-title">New Registration</h5>
+										<i class="fas fa-file fa-5x"></i>
+										<p class="card-text"></p>
+										<button class="btn btn-primary"  type="submit" name="new" value="new">New</button>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="card text-center">
+									<div class="card-body">
+										<h5 class="card-title">Renewal</h5>
+										<i class="fas fa-file-alt fa-5x"></i>
+										<p class="card-text"></p>
+										<button class="btn btn-primary" type="submit" name="renew" value="renew">Renew</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
+            <div id="loading" class="overlay spanner">
+              <div class="loader"></div>
+              <p>Saving Form, please be patient.</p>
+            </div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /container -->
+
+{% endblock content %}
+
+
+{% block js %}
+  {{block.super}}
+
+  <script>
+    $(document).ready(function(){
+
+      // Form Overlay
+      $('form').on('submit', function(){
+        $('div#loading').addClass('show');
+        setTimeout(function() {
+          $('div#loading').removeClass('show');
+        }, 5000);
+      });
+
+    });
+  </script>
+
+{% endblock js %}

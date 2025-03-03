@@ -1,0 +1,109 @@
+{% extends 'portalpages/base_x.html' %}
+
+{% block title %} {{ title }} {% endblock title %}
+
+
+{% block css %}
+  <style>
+    p {
+      text-align: justify;
+    }
+
+    ol li {
+      text-align: justify;
+    }
+  </style>
+{% endblock css %}
+
+
+{% block content %}
+
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+	<div class="container" style="margin-top:5rem">
+
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'portalpages:home' %}">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Franchise</li>
+      </ol>
+    </nav>
+
+		<!-- Appointing Franchise -->
+		<div class="row">
+			<div class="col-md-12">
+				<div class="my-3 p-3 bg-white rounded shadow-sm">
+					<h2 class="border-bottom border-gray pb-2 mb-0"><center>Franchise</center></h2>
+
+					<p><br>
+						Duis facilisis consectetur cras amet<br>
+						No.: XX/X-XXX/XXX/X/XXXX
+
+						<h5 class="border-bottom border-gray pb-2 mb-0">Required Document:</h5>
+						<ol>
+							<li>
+                Mauris elementum ipsum et dignissim malesuada. Orci varius natoque penatibus et magnis dis accumsan;
+							</li>
+							<li>
+                Vestibulum vitae lectus id erat tincidunt viverra. In a velit in ipsum lacinia euismod. Maecenas mi;
+							</li>
+							<li>
+                Pellentesque eget augue sed quam semper dictum. Integer tortor ex, mattis non suscipit hendrerit, commodo ac ipsum. Nullam eget maximus sapien, vel mattis nunc. Aenean id placerat elit, a placerat.
+							</li>
+						</ol>
+
+						<h5 class="border-bottom border-gray pb-2 mb-0">Procedure</h5>
+						Duis in tortor id libero blandit facilisis in odio:
+						<ol>
+							<li>
+								Aliquam erat volutpat. Etiam sit amet risus nec dolor aliquet blandit. Donec venenatis pellentesque accumsan. Vestibulum finibus accumsan fringilla. Donec mattis magna a justo eleifend, nec lobortis tortor rhoncus tellus.
+							</li>
+							<li>
+								Phasellus ultricies ex quis suscipit consequat. Class aptent taciti sociosqu ad litora odio.
+							</li>
+							<li>
+								Nunc vitae diam tempus, dapibus dui a, laoreet lorem. Morbi tristique justo eleifend, viverra sem eu, rutrum sapien.
+							</li>
+							<li>
+								Duis eu diam nec erat posuere varius. Phasellus tincidunt.
+							</li>
+						</ol>
+
+						Fusce tortor ipsum, molestie quis accumsan nisi:<BR>
+            <address>
+            Donec id ante odio<br>
+            Quisque pulvinar nec<br>
+            Nunc feugiat ante erat augue<br>
+            Duis mattis sem duis<br>
+            <br><br>
+            Quisque venenatis faucibus ex id cursus. Ut nulla:<br>
+            Donec id ante odio Office at: XXX-XXX-XXXX, or<br>
+            Email: example@email.com and example@email.com
+            </address>
+					</p>
+
+				</div>
+			</div>
+		</div>
+
+		<hr>
+
+	</div>
+	<!-- /container -->
+
+{% endblock content %}
+
+
+{% block js %}
+  {{block.super}}
+
+  <script>
+    $(document).ready(function(){
+
+      // Nav Active
+      $('#nav-home').addClass('active')
+
+    });
+  </script>
+
+{% endblock js %}

@@ -1,0 +1,198 @@
+{% extends 'transactions/base-transactions.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %} {{ title }} {% endblock title %}
+
+{% block content %}
+
+	<!-- Main jumbotron for a primary marketing message or call to action -->
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item active" aria-current="page">Home</li>
+		</ol>
+	</nav>
+
+	<!-- Container -->
+	<div class="container">
+
+		<!-- ID Company -->
+		<div class="row">
+			<div class="col-md-12">
+
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item">
+							<a href="{% url 'portalpages:home' %}">Home</a>
+						</li>
+						<li class="breadcrumb-item active" aria-current="page">
+							{% block menu %} {{ title }} {% endblock menu %}
+						</li>
+					</ol>
+				</nav>
+
+        {% include 'messages.html'%}
+
+				<div class="my-3 p-3 bg-white rounded shadow-sm">
+
+					<div class="track">
+						<div class="step active"> <span class="icon"> <i class="fas fa-check"></i> </span> <span class="text">Company in XA</span> </div>
+						<div class="step active"> <span class="icon"> <i class="fas fa-globe-asia"></i> </span> <span class="text">Company in XB</span> </div>
+						<div class="step"> <span class="icon"> <i class="fa fa-address-card"></i> </span> <span class="text"> Applicant Detail </span> </div>
+					</div>
+
+					<h2 class="border-bottom border-gray pb-2 mb-0">
+					<center>{% block form_title %}{{ form_title }}{% endblock form_title %}</center>
+					</h2><br>
+
+					<p><b>{% block form_desc_title %}{{ form_desc_title }}{% endblock form_desc_title %}</b></p>
+
+					<small class="form-text text-muted">Please fill in detailed information of your company (XB).</small></p>
+
+					<form method="POST" class="post-form" enctype="multipart/form-data">
+						{% csrf_token %}
+
+						<div class="form-group row">
+							<div class="col">
+								{{form.comp_idn_name | as_crispy_field}}
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col">
+								{{form.comp_idn_president | as_crispy_field}}
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col">
+								{{form.comp_idn_address | as_crispy_field}}
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col-sm-4">
+								{{form.comp_idn_province | as_crispy_field}}
+							</div>
+							<div class="col-sm-4">
+								{{form.comp_idn_city | as_crispy_field}}
+							</div>
+							<div class="col-sm-4">
+								{{form.comp_idn_zip | as_crispy_field}}
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col-sm-4">
+								{{form.comp_idn_website | as_crispy_field}}
+							</div>
+							<div class="col-sm-4">
+								{{form.comp_idn_phone | as_crispy_field}}
+							</div>
+							<div class="col-sm-4">
+								{{form.comp_idn_fax | as_crispy_field}}
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col">
+								{{form.comp_idn_email | as_crispy_field}}
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col-sm-4">
+								{{form.term | as_crispy_field}}
+							</div>
+							<div class="col-sm-4">
+								{{form.term_unit | as_crispy_field}}
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col">
+                {{form.comp_idn_nationality | as_crispy_field}}
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col">
+								{{form.comp_idn_idnumber | as_crispy_field}}
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col">
+								{{form.comp_idn_rep_officer | as_crispy_field}}
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col">
+								{{form.loi | as_crispy_field}}
+								<small id="loiHelp" class="form-text text-info cente mt-n2"><i class="fas fa-info-circle"></i>
+                  Please upload the scanned LOI between your (XA) company and the XB company, LEGALIZED BY NOTARY PUBLIC,
+                  (please refer to example <a href="{% url 'portalpages:home'%}" target="_blank" class="font-italic"><u>here</u></a>)
+                </small>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col">
+								{{form.loa | as_crispy_field}}
+								<small id="loaHelp" class="form-text text-info center mt-n2"><i class="fas fa-info-circle"></i>
+                  Please upload the scanned LOA between your (XA) company and the XB company, LEGALIZED BY NOTARY PUBLIC,
+                  (please refer to example <a href="{% url 'portalpages:home'%}" target="_blank" class="font-italic"><u>here</u></a>)
+                </small>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col">
+								{{form.los | as_crispy_field}}
+								<small id="losHelp" class="form-text text-info center mt-n2"><i class="fas fa-info-circle"></i>
+                  Please upload the scanned LOS between your (XA) company and the XB company, LEGALIZED BY NOTARY PUBLIC,
+                  (please refer to example <a href="{% url 'portalpages:home'%}" target="_blank" class="font-italic"><u>here</u></a>)
+                </small>
+							</div>
+						</div>
+
+						<hr class="my-4">
+
+						<div class="d-flex justify-content-center">
+							<button type="submit" class="col-md-3 btn btn-primary btn-block">Submit</button>
+              <div id="loading" class="overlay spanner">
+                <div class="loader"></div>
+                <p>Uploading file, please be patient.</p>
+              </div>
+						</div>
+
+					</form>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+
+{% endblock content %}
+
+
+{% block js %}
+  {{block.super}}
+
+  <script>
+    $(document).ready(function(){
+
+      // Form Overlay
+      $('form').on('submit', function(){
+        $('div#loading').addClass('show');
+        setTimeout(function() {
+          $('div#loading').removeClass('show');
+        }, 5000);
+      });
+
+    });
+  </script>
+
+{% endblock js %}

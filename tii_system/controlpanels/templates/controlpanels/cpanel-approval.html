@@ -1,0 +1,878 @@
+{% extends 'controlpanels/base-cpanel.html' %}
+
+{% load group_filters %}
+
+{% load status_filters %}
+
+
+{% block css %}
+  <style>
+
+    button.is-disabled:disabled,
+    button.is-disabled[disabled]{
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #303030;
+    }
+
+  </style>
+{% endblock css %}
+
+
+{% block content %}
+
+  <div class="row">
+    <div class="col-md-12">
+
+      <div class="card bg-white rounded shadow-sm">
+        <h2 class="border-bottom border-gray pb-2 mb-0 card-header"><center>Detail Transaction {{trans.registration_code}}</center></h2>
+      </div>
+
+      {% if trans.status == 'Decline' and not revise %}
+        <div class="my-3 p-3 alert-danger rounded shadow-sm">
+          <p class="font-weight-bold">Revision Notes :<span class="btn btn-sm btn-danger mx-3">Need Confirmation from User to Revise and Resubmit</span></p>
+          <textarea class="form-control text-justify" rows="3" disabled>{{trans.notes}}</textarea>
+        </div>
+      {% endif %}
+
+      {% if trans.status == 'Decline' and revise %}
+        <div class="my-3 p-3 alert-warning rounded shadow-sm">
+          <p class="font-weight-bold">Revision Notes :<span class="btn btn-sm btn-info mx-3">Already in the revision process.</span></p>
+          <textarea class="form-control text-justify" rows="3" disabled>{{trans.notes}}</textarea>
+        </div>
+      {% endif %}
+
+      <div class="my-4">
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+
+          <div class="accordion" id="accordionExample">
+
+            <!-- Company XA Detail -->
+            <div class="card">
+              <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                  <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                    <i class="fas fa-chevron-right"></i>&nbsp;<span class="h5">Company XA Detail</span>
+                  </button>
+                </h2>
+              </div>
+
+              <div id="collapseOne" class="collapse multi-collapse" aria-labelledby="headingOne" >
+                <div class="card-body">
+
+                  <div class="row">
+                    <div class="col-5">
+                      <ul>
+                        <li>Company Name</li>
+                      </ul>
+                    </div>
+                    <div class="col-auto">
+                        :
+                    </div>
+                    <div class="col-5">
+                        {{trans.comp_us_name}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-5">
+                      <ul>
+                        <li>Company President</li>
+                      </ul>
+                    </div>
+                    <div class="col-auto">
+                      :
+                    </div>
+                    <div class="col-5">
+                      {{trans.comp_us_president}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-5">
+                      <ul>
+                        <li>Company Legal Status</li>
+                      </ul>
+                    </div>
+                    <div class="col-auto">
+                      :
+                    </div>
+                    <div class="col-5">
+                      {{trans.comp_us_legal_status}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-5">
+                      <ul>
+                        <li>Company Year Establishment</li>
+                      </ul>
+                    </div>
+                    <div class="col-auto">
+                      :
+                    </div>
+                    <div class="col-5">
+                      {{trans.comp_us_establishment}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-5">
+                      <ul>
+                        <li>Company Address</li>
+                      </ul>
+                    </div>
+                    <div class="col-auto">
+                      :
+                    </div>
+                    <div class="col-5">
+                      {{trans.comp_us_address}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-5">
+                      <ul>
+                        <li>Company State</li>
+                      </ul>
+                    </div>
+                    <div class="col-auto">
+                      :
+                    </div>
+                    <div class="col-5">
+                      {{trans.comp_us_state}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-5">
+                      <ul>
+                        <li>Company City</li>
+                      </ul>
+                    </div>
+                    <div class="col-auto">
+                      :
+                    </div>
+                    <div class="col-5">
+                      {{trans.comp_us_city}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-5">
+                      <ul>
+                        <li>Company Zip Code</li>
+                      </ul>
+                    </div>
+                    <div class="col-auto">
+                      :
+                    </div>
+                    <div class="col-5">
+                      {{trans.comp_us_zip}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-5">
+                      <ul>
+                        <li>Company Website</li>
+                      </ul>
+                    </div>
+                    <div class="col-auto">
+                      :
+                    </div>
+                    <div class="col-5">
+                      {{trans.comp_us_website|default_if_none:"-"}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-5">
+                      <ul>
+                        <li>Company Phone</li>
+                      </ul>
+                    </div>
+                    <div class="col-auto">
+                      :
+                    </div>
+                    <div class="col-5">
+                      {{trans.comp_us_phone}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-5">
+                      <ul>
+                        <li>Company Fax</li>
+                      </ul>
+                    </div>
+                    <div class="col-auto">
+                      :
+                    </div>
+                    <div class="col-5">
+                      {{trans.comp_us_fax|default_if_none:"-"}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-5">
+                      <ul>
+                        <li>Company Email</li>
+                      </ul>
+                    </div>
+                    <div class="col-auto">
+                      :
+                    </div>
+                    <div class="col-5">
+                      {{trans.comp_us_email}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-5">
+                      <ul>
+                        <li>Company Line of Business</li>
+                      </ul>
+                    </div>
+                    <div class="col-auto">
+                      :
+                    </div>
+                    <div class="col-5">
+                      {{trans.line_of_business}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-5">
+                      <ul>
+                        <li>Company Product Offering</li>
+                      </ul>
+                    </div>
+                    <div class="col-auto">
+                      :
+                    </div>
+                    <div class="col-5">
+                      {{trans.product_offering}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-5">
+                      <ul>
+                        <li>HS CODE</li>
+                      </ul>
+                    </div>
+                    <div class="col-auto">
+                      :
+                    </div>
+                    <div class="col-5">
+                      {{trans.hs_code}}
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- Company XB Detail -->
+            <div class="card">
+              <div class="card-header" id="headingTwo">
+                <h2 class="mb-0">
+                  <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    <i class="fas fa-chevron-right"></i>&nbsp;<span class="h5">Company XB Detail</span>
+                  </button>
+                </h2>
+              </div>
+
+              <div id="collapseTwo" class="collapse multi-collapse" aria-labelledby="headingTwo" >
+                <div class="card-body">
+
+                  <div class="row">
+                    <div class="col-5">
+                      <ul>
+                        <li>Company Name</li>
+                      </ul>
+                    </div>
+                    <div class="col-auto">
+                      :
+                    </div>
+                    <div class="col-5">
+                      {{trans.comp_idn_name}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-5">
+                      <ul>
+                        <li>Company President</li>
+                      </ul>
+                    </div>
+                    <div class="col-auto">
+                      :
+                    </div>
+                    <div class="col-5">
+                      {{trans.comp_idn_president}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-5">
+                      <ul>
+                        <li>Company Address</li>
+                      </ul>
+                    </div>
+                    <div class="col-auto">
+                      :
+                    </div>
+                    <div class="col-5">
+                      {{trans.comp_idn_address}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-5">
+                      <ul>
+                        <li>Company Province</li>
+                      </ul>
+                    </div>
+                    <div class="col-auto">
+                      :
+                    </div>
+                    <div class="col-5">
+                      {{trans.comp_idn_province}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-5">
+                      <ul>
+                        <li>Company City</li>
+                      </ul>
+                    </div>
+                    <div class="col-auto">
+                      :
+                    </div>
+                    <div class="col-5">
+                      {{trans.comp_idn_city}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-5">
+                      <ul>
+                        <li>Company Zip Code</li>
+                      </ul>
+                    </div>
+                    <div class="col-auto">
+                      :
+                    </div>
+                    <div class="col-5">
+                      {{trans.comp_idn_zip}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-5">
+                      <ul>
+                        <li>Company Website</li>
+                      </ul>
+                    </div>
+                    <div class="col-auto">
+                      :
+                    </div>
+                    <div class="col-5">
+                      {{trans.comp_idn_website|default_if_none:"-"}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-5">
+                      <ul>
+                        <li>Company Phone</li>
+                      </ul>
+                    </div>
+                    <div class="col-auto">
+                      :
+                    </div>
+                    <div class="col-5">
+                      {{trans.comp_idn_phone}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-5">
+                      <ul>
+                        <li>Company Fax</li>
+                      </ul>
+                    </div>
+                    <div class="col-auto">
+                      :
+                    </div>
+                    <div class="col-5">
+                      {{trans.comp_idn_fax|default_if_none:"-"}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-5">
+                      <ul>
+                        <li>Company Email</li>
+                      </ul>
+                    </div>
+                    <div class="col-auto">
+                      :
+                    </div>
+                    <div class="col-5">
+                      {{trans.comp_idn_email}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-5">
+                      <ul>
+                        <li>Term </li>
+                      </ul>
+                    </div>
+                    <div class="col-auto">
+                      :
+                    </div>
+                    <div class="col-5">
+                      {{trans.term}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-5">
+                      <ul>
+                        <li>Term Unit </li>
+                      </ul>
+                    </div>
+                    <div class="col-auto">
+                      :
+                    </div>
+                    <div class="col-5">
+                      {{trans.term_unit}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-5">
+                      <ul>
+                        <li>Representative Officer Nationality</li>
+                      </ul>
+                    </div>
+                    <div class="col-auto">
+                      :
+                    </div>
+                    <div class="col-5">
+                      {{trans.comp_idn_nationality}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-5">
+                      <ul>
+                        <li>Representative Officer ID Card Number</li>
+                      </ul>
+                    </div>
+                    <div class="col-auto">
+                      :
+                    </div>
+                    <div class="col-5">
+                      {{trans.comp_idn_idnumber}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-5">
+                      <ul>
+                        <li>Representative Officer Name </li>
+                      </ul>
+                    </div>
+                    <div class="col-auto">
+                      :
+                    </div>
+                    <div class="col-5">
+                      {{trans.comp_idn_rep_officer}}
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- Applicant Detail -->
+            <div class="card">
+              <div class="card-header" id="headingThree">
+                <h2 class="mb-0">
+                  <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    <i class="fas fa-chevron-right"></i>&nbsp;<span class="h5">Applicant Detail</span>
+                  </button>
+                </h2>
+              </div>
+
+              <div id="collapseThree" class="collapse multi-collapse" aria-labelledby="headingThree" >
+                <div class="card-body">
+
+                  <div class="row">
+                    <div class="col-5">
+                      <ul>
+                        <li>Applicant Name</li>
+                      </ul>
+                    </div>
+                    <div class="col-auto">
+                      :
+                    </div>
+                    <div class="col-5">
+                      {{trans.applicant_name}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-5">
+                      <ul>
+                        <li>Applicant Position</li>
+                      </ul>
+                    </div>
+                    <div class="col-auto">
+                      :
+                    </div>
+                    <div class="col-5">
+                      {{trans.applicant_position}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-5">
+                      <ul>
+                        <li>Applicant City</li>
+                      </ul>
+                    </div>
+                    <div class="col-auto">
+                      :
+                    </div>
+                    <div class="col-5">
+                      {{trans.applicant_city}}
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- Download Document -->
+            <div class="card">
+              <div class="card-header" id="headingFour">
+                <h2 class="mb-0">
+                  <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                    <i class="fas fa-chevron-right"></i>&nbsp;<span class="h5">Download Document</span>
+                  </button>
+                </h2>
+              </div>
+
+              <div id="collapseFour" class="collapse multi-collapse" aria-labelledby="headingFour" >
+                <div class="card-body">
+
+                  {% if trans.trans_type_id.trans_type_id == 1 %}
+
+                    <div class="row">
+                      <div class="col-5">
+                        <ul>
+                          <li>Certificate of Good Standing</li>
+                        </ul>
+                      </div>
+                      <div class="col-auto">
+                        :
+                      </div>
+                      <div class="col-5">
+                        {% if trans.cert_good_standing %}
+                          <a href="{{ trans.cert_good_standing.url }}" download><i class="fas fa-download"></i> Download</a>
+                        {% else %}
+                          <span><i class="fas fa-ban"></i>This file is not available</span>
+                        {% endif %}
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-5">
+                        <ul>
+                          <li>LoI</li>
+                        </ul>
+                      </div>
+                      <div class="col-auto">
+                        :
+                      </div>
+                      <div class="col-5">
+                        {% if trans.loi %}
+                          <a href="{{ trans.loi.url }}" download><i class="fas fa-download"></i> Download</a>
+                        {% else %}
+                          <span><i class="fas fa-ban"></i>This file is not available</span>
+                        {% endif %}
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-5">
+                        <ul>
+                          <li>LoA</li>
+                        </ul>
+                      </div>
+                      <div class="col-auto">
+                        :
+                      </div>
+                      <div class="col-5">
+                        {% if trans.loa %}
+                          <a href="{{ trans.loa.url }}" download><i class="fas fa-download"></i> Download</a>
+                        {% else %}
+                          <span><i class="fas fa-ban"></i>This file is not available</span>
+                        {% endif %}
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-5">
+                        <ul>
+                          <li>LoS</li>
+                        </ul>
+                      </div>
+                      <div class="col-auto">
+                        :
+                      </div>
+                      <div class="col-5">
+                        {% if trans.los %}
+                          <a href="{{ trans.los.url }}" download><i class="fas fa-download"></i> Download</a>
+                        {% else %}
+                          <span><i class="fas fa-ban"></i>This file is not available</span>
+                        {% endif %}
+                      </div>
+                    </div>
+
+                  {% elif trans.trans_type_id.trans_type_id == 2 %}
+
+                    <div class="row">
+                      <div class="col-5">
+                        <ul>
+                          <li>Certificate of Good Standing</li>
+                        </ul>
+                      </div>
+                      <div class="col-auto">
+                        :
+                      </div>
+                      <div class="col-5">
+                        {% if trans.cert_good_standing %}
+                          <a href="{{ trans.cert_good_standing.url }}" download><i class="fas fa-download"></i> Download</a>
+                        {% else %}
+                          <span><i class="fas fa-ban"></i>This file is not available</span>
+                        {% endif %}
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-5">
+                        <ul>
+                          <li>Contractual Agreement</li>
+                        </ul>
+                      </div>
+                      <div class="col-auto">
+                        :
+                      </div>
+                      <div class="col-5">
+                        {% if trans.contractual_agreement %}
+                          <a href="{{ trans.contractual_agreement.url }}" download><i class="fas fa-download"></i> Download</a>
+                        {% else %}
+                          <span><i class="fas fa-ban"></i>This file is not available</span>
+                        {% endif %}
+                      </div>
+                    </div>
+
+                  {% elif trans.trans_type_id.trans_type_id == 3 %}
+
+                    <div class="row">
+                      <div class="col-5">
+                        <ul>
+                          <li>Certificate of Good Standing</li>
+                        </ul>
+                      </div>
+                      <div class="col-auto">
+                        :
+                      </div>
+                      <div class="col-5">
+                        {% if trans.cert_good_standing %}
+                          <a href="{{ trans.cert_good_standing.url }}" download><i class="fas fa-download"></i> Download</a>
+                        {% else %}
+                          <span><i class="fas fa-ban"></i>This file is not available</span>
+                        {% endif %}
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-5">
+                        <ul>
+                          <li>Prospectus Agreement</li>
+                        </ul>
+                      </div>
+                      <div class="col-auto">
+                        :
+                      </div>
+                      <div class="col-5">
+                        {% if trans.prospectus_agreement %}
+                          <a href="{{ trans.prospectus_agreement.url }}" download><i class="fas fa-download"></i> Download</a>
+                        {% else %}
+                          <span><i class="fas fa-ban"></i>This file is not available</span>
+                        {% endif %}
+                      </div>
+                    </div>
+
+                  {% endif %}
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr class="my-4">
+
+          <div class="row d-flex justify-content-around">
+
+            <div class="col-3">
+              <button type="button" class="btn btn-outline-primary btn-block" id="btn-back">Back</button>
+            </div>
+
+            {% if request.user|has_group:"operator" %}
+
+              {% if trans.status|done_review_ops %} <!-- ['Decline', 'Verified'] -->
+                <div class="col-3">
+                  <button type="button" disabled class="btn btn-block is-disabled">Reject</button>
+                </div>
+
+                <div class="col-3">
+                  <button type="button" disabled class="btn btn-block is-disabled">Verify</button>
+                </div>
+
+              {% elif trans.status|under_review_ops %} <!-- ['Submit'] -->
+
+                <div class="col-3">
+                  <a class="btn btn-outline-danger btn-block" href="{% url 'c-panels:reject-transaction' trans.registration_code %}" role="button">Reject</a>
+                </div>
+
+                <!-- Button trigger modal -->
+                <div class="col-3">
+                  <button type="button" class="btn btn-outline-info btn-block" data-toggle="modal" data-target="#modal-confirm-verify">Verify</button>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="modal-confirm-verify" tabindex="-1" role="dialog" aria-labelledby="modal-confirm-verifyTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="modal-confirm-verifyTitle">Verify Confirmation</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        Are you sure to Verify this Transaction?
+                      </div>
+                      <div class="modal-footer">
+                        <button type="submit" class="btn btn-outline-info btn-block" name="Verify" value="Verify">Yes</button>
+                        <button type="button" class="btn btn-outline-secondary btn-block" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              {% endif %}
+
+            {% elif request.user|has_group:"manager" %}
+
+              {% if trans.status|done_review_mgr %} <!-- ['Decline', 'Approve', 'Submit'] -->
+
+                <div class="col-3">
+                  <button type="button" disabled class="btn btn-block is-disabled">Reject</button>
+                </div>
+
+                <div class="col-3">
+                  <button type="button" disabled class="btn btn-block is-disabled">Approve</button>
+                </div>
+
+              {% elif trans.status|under_review_mgr %} <!-- ['Verified'] -->
+
+                <div class="col-3">
+                  <a class="btn btn-outline-danger btn-block" href="{% url 'c-panels:reject-transaction' trans.registration_code %}" role="button">Reject</a>
+                </div>
+
+                <!-- Button trigger modal -->
+                <div class="col-3">
+                  <button type="button" class="btn btn-outline-success btn-block" data-toggle="modal" data-target="#modal-confirm-approve">Approve</button>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="modal-confirm-approve" tabindex="-1" role="dialog" aria-labelledby="modal-confirm-approveTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="modal-confirm-approveTitle">Approval Confirmation</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        Are you sure to Approve this Transaction?
+                      </div>
+                      <div class="modal-footer">
+                        <button type="submit" class="btn btn-outline-success btn-block" name="Approve" value="Approve">Yes</button>
+                        <button type="button" class="btn btn-outline-secondary btn-block" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              {% endif %}
+
+            {% endif %}
+
+          </div>
+
+          <div id="loading" class="overlay spanner">
+            <div class="loader"></div>
+            <p>Saving Form, please be patient.</p>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+{% endblock content %}
+
+
+{% block js %}
+  {{block.super}}
+
+  <script>
+    $(document).ready(function(){
+
+      // Back
+      $('#btn-back').on('click', function(){
+        window.location.replace("{% url 'c-panels:list-transaction' %}");
+      });
+
+      // Form Overlay
+      $('form').on('submit', function(){
+        $('div#loading').addClass('show');
+        setTimeout(function() {
+          $('div#loading').removeClass('show');
+        }, 5000);
+      });
+
+      // Collapse Change Arrow
+      $('button[data-toggle="collapse"]').on('click', function(){
+        $(this).find('i').toggleClass('fas fa-chevron-right fas fa-chevron-down');
+      });
+
+    });
+  </script>
+
+{% endblock js %}

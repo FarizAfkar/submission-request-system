@@ -1,0 +1,210 @@
+{% load static %}
+
+<!doctype html>
+<html>
+
+    <head>
+
+        <meta charset="utf-8">
+
+        <title>{{title}}</title>
+
+        <style type="text/css">
+            /* ========== Setting Page ========== */
+            @page {
+                size: A4;
+                margin-top: 1cm;
+                margin-left: 0.25cm;
+                margin-right: 0.25cm;
+                margin-bottom: 1cm;
+            }
+            /* ========== End Setting Page ========== */
+
+            /* ========== Header ========== */
+            .header {
+                font-family:'Times New Roman', Times, serif;
+                margin-top: 100px;
+                margin-bottom: 20px;
+            }
+
+            .header-table {
+                text-align: center;
+            }
+
+            .header-left span {
+                font-size: 12px;
+            }
+
+            .header-right span {
+                font-size: 12px;
+            }
+
+            .header-img {
+                width: 100px;
+            }
+            /* ========== End Header ========== */
+
+            /* ========== Date ========== */
+            .date {
+                font-size: 15px;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                margin-top: 20px;
+                margin-bottom: 20px;
+                margin-left: 80px;
+                margin-right: 80px;
+            }
+            /* ========== End Date ========== */
+
+            /* ========== Opening ========== */
+            .opening {
+                font-size:15px;
+                font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                margin-top: 20px;
+                margin-bottom: 30px;
+                margin-left: 80px;
+                margin-right: 80px;
+            }
+
+            .opening-detail {
+                margin-top: 30px;
+                margin-bottom: 30px;
+            }
+            /* ========== End Opening ========== */
+
+            /* ========== Subject ========== */
+            .subject {
+                font-size:15px;
+                font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                margin-top: 20px;
+                margin-bottom: 20px;
+                margin-left: 80px;
+                margin-right: 80px;
+            }
+
+            .subject-detail {
+                margin-bottom: 40px;
+            }
+            /* ========== End Subject========== */
+
+            /* ========== Content ========== */
+            .content {
+                font-size:15px;
+                font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                margin-top: 20px;
+                margin-bottom: 20px;
+                margin-left: 80px;
+                margin-right: 80px;
+                text-align: justify;
+            }
+            /* ========== End Content ========== */
+
+            /* ========== Signature ========== */
+            .signature {
+                font-size:15px;
+                font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                margin-top: 20px;
+                margin-bottom: 20px;
+                margin-left: 80px;
+                margin-right: 80px;
+            }
+
+            .signature-open {
+                margin-top: 50px;
+            }
+            .signature-name {
+                margin-top: 70px;
+            }
+            /* ========== End Signature ========== */
+
+        </style>
+
+    </head>
+
+    <body>
+        <!-- Header -->
+        <div class="header">
+            <table class="header-table">
+                <tr>
+                    <td>
+                        <p class="header-left">
+                            <span>K</span>Ut amet <span>B</span>Eget <span>R</span>Egestas <span>I</span>Ut justo <br>
+                            <span>E</span>In sed nullam <span>R</span>Erat curae <span>I</span>Ut justo  <br>
+                            <span>W</span>Etiam nam, <span>D.C.</span> XXXXX <br>
+                            <span>T</span>EL.: (XXX) XXX-XXXX <span>F</span>AX: (XXX) XXX-XXX <br>
+                        </p>
+                    </td>
+                    <td style="width: 210px;">
+                        <img class="header-img" src="http://127.0.0.1:8000/static/dashboards/images/pancasila.png"/>
+                    </td>
+                    <td>
+                        <p class="header-right">
+                            <span>A</span>Eget <span>P</span>Nunc proin <br>
+                            <span>T</span>HE <span>C</span>Proin non <span>A</span>Libero <br>
+                            2020 <span>M</span>Maecenas nam <span>A</span>Augue, <span>N.W.</span> <br>
+                            <span>T</span>EL.: (XXX) XXX-XXXX <span>F</span>AX: (XXX) XXX-XXXX <br>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Date -->
+        <div class="date">
+            {{ trans.approval_date | date:'M d, Y' }}
+            <br>
+        </div>
+
+        <!-- Opening -->
+        <div class="opening">
+            <p class="opening-detail">
+                <strong>{{trans.applicant_name}}</strong> <br>
+                {{trans.applicant_position}} <br>
+                {{trans.comp_us_name}} <br>
+                {{trans.comp_us_address}} <br>
+                {{trans.comp_us_city}}, {{trans.comp_us_state}} {{trans.comp_us_zip}} – USA <br>
+            </p>
+        </div>
+
+        <!-- Subject -->
+        <div class="subject">
+            <p class="subject-detail">Subject: &nbsp;&nbsp; <u>{{trans_subject_1}} <strong>{{trans_subject_2}}</strong></u></p>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <p class="content-open">Dear Mr./Ms {{trans.applicant_name}},</p>
+            <p>
+                Mauris lacinia ut justo at ultricies. Pellentesque nec <i>“{{trans_detail}},”</i> In eget rhoncus nulla dui {{trans.renewal_type}} In hendrerit dui
+                Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos biam
+                dIn hac habitasse platea non XXXX in XB
+                Suspendisse porttitor.
+            </p>
+            <p>
+                Sed felis ipsum, dictum in est eu, egestas gravida neque. Etiam urna nisi amet
+                Etiam elit mauris, semper vitae sagittis eu, volutpat sit amet eros. Duis fringilla diam eu
+                months (due on 31<sup>st</sup>  of July and 31<sup>st</sup> of December) Quisque orci purus, dapibus non dui.
+                Proin dapibus ex nunc, quis ullamcorper orci interdum cursus. Morbi et ipsum nulla
+                Nam lobortis lacus non accumsan tincidunt. Ut ut mi bibendum, tincidunt dolor duis
+                Cras eget ligula leo. Quisque vulputate et augue.
+            </p>
+            <p>
+                Vestibulum posuere non ante et fermentum. Nam pharetra et sem sit amet porttitor. Aliquam ligula.
+            </p>
+        </div>
+
+        <!-- Signature -->
+        <div class="signature">
+            <p class="signature-open">Sincerely yours,</p>
+            <p class="signature-name">
+                {{trans.approval_name}} <br>
+                Nullam turpis duis <br>
+            </p>
+            <p>
+                Enclosure:
+            </p>
+
+        </div>
+
+    </body>
+
+</html>

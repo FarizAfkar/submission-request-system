@@ -1,0 +1,152 @@
+{% extends 'portalpages/base_x.html' %}
+
+{% block title %} {{ title }} {% endblock title %}
+
+
+{% block css %}
+  <style>
+    p {
+      text-align: justify;
+    }
+
+    ol li {
+      text-align: justify;
+    }
+
+  </style>
+{% endblock css %}
+
+
+{% block content %}
+
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+	<div class="container" style="margin-top:5rem">
+
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'portalpages:home' %}">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Help</li>
+      </ol>
+    </nav>
+
+		<!-- Help -->
+		<div class="row">
+			<div class="col-md-12">
+
+        <!-- Information -->
+				<div class="my-3 p-3 alert-warning rounded shadow-sm">
+					<p class="text-justify">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas tortor nisl, rutrum non justo pulvinar lectus.<br><br>
+
+            Lorem ipsum dui. :<br>
+            Lorem ipsum dolor sit amet duis: <a href="tel:08xxxxxxxx">08xxxxxxxx</a><br>
+            Viverra: <a href="tel:08xxxxxxxx">08xxxxxxxx</a><br><br>
+
+            Quisque et eros proin:<br>
+            Tellus <a href="tel:08xxxxxxxx">08xxxxxxxx</a>;
+            Tortor <a href="tel:08xxxxxxxx">08xxxxxxxx</a>; Cras velit <a href="tel:08xxxxxxxx">08xxxxxxxx</a>;
+            Ut <a href="tel:08xxxxxxxx">08xxxxxxxx</a>; Vivamus nisi <a href="tel:08xxxxxxxx">08xxxxxxxx</a>
+            <br>
+            Sed tristique, dolor nec tempus ut: template@example.com
+          </p>
+				</div>
+
+        <!-- List Information -->
+        <div class="rounded shadow-sm card">
+
+          <div class="text-center card-header">
+            <strong>Integer semper tellus eu arcu pretium, sit amet sodales magna sodales sed</strong>
+          </div>
+
+          <div class="row card-body">
+            <div class="col-xs-12 col-lg-6">
+              <address>
+                <strong>Vivamus mi elit, viverra sed bibendum aliquet, porta ut id</strong><br>
+                Ut eget mi eget orci mauris,<br>
+                Donec magna integer<br>
+                <abbr title="Phone">P:</abbr><a href="tel:08xxxxxxxxx"> +62 (xxx) xxx-xxxx<br></a>
+                <abbr title="Fax">F:</abbr> +62 (xxx) xxx-xxxx<br>
+                <abbr title="Email">E:</abbr> template@example.com
+              </address>
+            </div>
+            <div class="col-xs-12 col-lg-6">
+              <address>
+                <strong>Sed et sodales ligula. Ut at posuere sem. Pellentesque a nam</strong><br>
+                Sed suscipit amet,<br>
+                Nulla iaculis in<br>
+                <abbr title="Phone">P:</abbr><a href="tel:13129201880"> +62 (xxx) xxx–xxxx<br></a>
+                <abbr title="Fax">F:</abbr> +62 (xxx) xxx–xxxx<br>
+                <abbr title="Email">E:</abbr> template@example.com
+              </address>
+            </div>
+            <div class="col-xs-12 col-lg-6">
+              <address>
+                <strong>Donec a posuere turpis. Cras egestas ac tortor ut massa nunc</strong><br>
+                Proin elit libero, maximus ac,<br>
+                Massa nunc<br>
+                <abbr title="Phone">P:</abbr><a href="tel:13129201880"> +62 (xxx) xxx–xxxx<br></a>
+                <abbr title="Fax">F:</abbr> +62 (xxx) xxx–xxxx<br>
+                <abbr title="Email">E:</abbr> template@example.com
+              </address>
+            </div>
+            <div class="col-xs-12 col-lg-6">
+              <address>
+                <strong>Vestibulum semper risus sit amet scelerisque porttitor. Donec eu</strong><br>
+                Cras at orci tincidunt,<br>
+                Pellentesque sed sed<br>
+                <abbr title="Phone">P:</abbr><a href="tel:13129201880"> +62 (xxx) xxx–xxxx<br></a>
+                <abbr title="Fax">F:</abbr> +62 (xxx) xxx–xxxx<br>
+                <abbr title="Email">E:</abbr> template@example.com <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;template@example.com
+              </address>
+            </div>
+            <div class="col-xs-12 col-lg-6">
+              <address>
+                <strong>Sed blandit fringilla elit sit amet finibus. Pellentesque sed</strong><br>
+                Phasellus laoreet, <br>
+                Donec sapien amet<br>
+                <abbr title="Phone">P:</abbr><a href="tel:12128790602"> +62 (xxx) xxx-xxxx<br></a>
+                <abbr title="Phone">P:</abbr><a href="tel:12128790604"> +62 (xxx) xxx-xxxx<br></a>
+                <abbr title="Fax">F:</abbr> +62 (xxx) xxx–xxxx<br>
+                <abbr title="Email">E:</abbr> template@example.com<br>
+              </address>
+            </div>
+            <div class="col-xs-12 col-lg-6">
+              <address>
+                <strong>Aliquam nec ultrices nisi, in pulvinar tortor. Donec sit amet odio</strong><br>
+                Nam in laoreet nunc, <br>
+                Duis eleifend at donec<br>
+                <abbr title="Phone">P:</abbr><a href="tel:13129201880"> +62 (xxx) xxx–xxxx<br></a>
+                <abbr title="Fax">F:</abbr> +62 (xxx) xxx–xxxx<br>
+                <abbr title="Email">E:</abbr> template@example.com<br>
+              </address>
+            </div>
+          </div>
+
+        </div>
+
+			</div>
+		</div>
+
+		<hr>
+
+	</div>
+	<!-- /container -->
+
+{% endblock content %}
+
+
+{% block js %}
+  {{block.super}}
+
+  <script>
+    $(document).ready(function(){
+
+      // Nav Active
+      $('#nav-help').addClass('active')
+
+    });
+  </script>
+
+{% endblock js %}

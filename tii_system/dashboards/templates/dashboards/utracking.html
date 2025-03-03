@@ -1,0 +1,133 @@
+{% extends 'dashboards/basedashboard.html' %}
+
+
+{% block sidebar_menu %}
+  <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+    <div class="sidebar-sticky pt-3">
+
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'dashboards:dashboard' %}">
+            <i class="fas fa-home"></i>
+            Dashboard <span class="sr-only"></span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'dashboards:transaction' %}">
+            <i class="far fa-list-alt"></i>
+            Transaction
+          </a>
+        </li> 
+      </ul>
+
+      <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+        <span>Transaction Tracking System</span>
+        <a class="d-flex align-items-center text-muted" href="#" onclick="return false;">
+          <i class="fas fa-plus-circle"></i>
+        </a>
+      </h6>
+
+      <ul class="nav flex-column mb-2">
+        <li class="nav-item">
+          <a class="nav-link active" href="{% url 'dashboards:tracking' %}">
+            <i class="fas fa-search"></i>
+            Tracking
+          </a>
+        </li>
+      </ul>
+
+    </div>
+  </nav>
+{% endblock sidebar_menu %}
+
+
+{% block content %}
+
+	<!-- Tracking -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card bg-white rounded shadow-sm">
+        <h2 class="border-bottom border-gray pb-2 mb-0 card-header"><center>Transaction Tracking System</center></h2>
+
+        <!-- Form -->
+        <form class="my-3 py-3 px-5" method="POST">
+          {% csrf_token %}
+
+          <!-- Form Input -->
+          <div class="input-group">
+            {% if error_flag %}
+              <input type="text" class="form-control is-invalid" id="registration-code" name="registration-code" placeholder="Enter Registration Code" aria-label="registration-code">
+              <div class="input-group-append">
+                <button class="px-5 btn btn-primary" type="submit"><i class="fas fa-search"></i> Check</button>
+              </div>
+              <div class="invalid-feedback">
+                Minimum 8 characters and Case Sensitive.
+              </div>
+            {% else %}
+              <input type="text" class="form-control" id="registration-code" name="registration-code" placeholder="Enter Registration Code" aria-label="registration-code">
+              <div class="input-group-append">
+                <button class="px-5 btn btn-primary" type="submit"><i class="fas fa-search"></i> Check</button>
+              </div>
+            {% endif %}
+
+          </div>
+
+          <!-- Form Overlay -->
+          <div id="loading" class="overlay spanner">
+            <div class="loader"></div>
+            <p class="text-center">Finding Transaction, Please Wait.</p>
+          </div>
+
+        </form>
+        
+      </div>
+
+      {% if registration_code %}
+        <div class="card my-3 p-3 bg-white rounded shadow-sm">
+          
+          <p>Registration Code : {{registration_code}}</p>
+
+          <h5 class="border-bottom border-gray pb-2 mb-0">DETAIL TRANSACTION PROCESS :</h5>
+          
+          {% if error_message %}
+            <div class="alert alert-info mt-3" role="alert">
+              <h4 class="alert-heading"><i class="fas fa-search"></i> No data found...</h4>
+              <p><strong>{{error_message}}</strong></p>
+              <hr class="my-4">
+            </div>
+          {% else %}
+            <div class="table-responsive">
+              <table class="table table-striped table-sm table-bordered">
+                <thead>
+                  <tr class="text-center">
+                    <th>Time</th>
+                    <th>Detail Process</th>
+                    <th>Status</th>
+                    <th>Notes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for track in tracking %}
+                    <tr>
+                      <td style="width: 20%;">{{track.timestamps|date:"d-m-Y"}}, {{track.timestamps|time:"h:i A"}}</td>
+                      <td>{{track.track_id.description|capfirst}}</td>
+                      <td>{{track.track_id.name|capfirst}}</td>
+                      {% if track.track_id.name == 'rejected' %}
+                        <td class="text-justify">{{track.trans_id.notes|default_if_none:"-"}}</td>
+                      {% else %}
+                        <td class="text-justify">-</td>
+                      {% endif %}
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          {% endif %}
+
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+
+{% endblock content %}

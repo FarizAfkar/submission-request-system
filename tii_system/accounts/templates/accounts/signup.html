@@ -1,0 +1,187 @@
+{% extends 'accounts/base.html' %}
+
+{% block title %} {{ title }} {% endblock title %}
+
+{% block content %}
+
+	<!-- Main jumbotron for a primary marketing message or call to action -->
+  <div class="container" style="margin-top:5rem;">
+
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'portalpages:home' %}">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Sign Up</li>
+      </ol>
+    </nav>
+
+		<!-- Sign up Form -->
+		<div class="row">
+			<div class="col-md-12">
+				<div class="my-3 p-3 bg-white rounded shadow-sm">
+
+          <!-- Title -->
+					<h2 class="border-bottom border-gray pb-2 mb-0"><center>Sign up Form</center></h2>
+
+          <!-- Form -->
+					<form method="post" class="bg-light border rounded p-5" style="margin-top: 50px;">
+
+            <!-- Form Input -->
+						<div class="form-group row" style="align-items: flex-end;">
+							{% csrf_token %}
+							{% for field in form %}
+								<label class="col-sm-2 col-form-label">
+								{{ field.label_tag }}
+								</label>
+								<div class="col-sm-10">
+									{% if field.help_text %}
+										<small class="form-text text-muted">{{ field.help_text }}</small>
+									{% endif %}
+                  {% if field.name == 'username' %}
+                    <div class="input-group mb-2">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                      </div>
+                      {{field}}
+                    </div>
+                  {% elif field.name == 'first_name' %}
+                    <div class="input-group mb-2">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+                      </div>
+                      {{field}}
+                    </div>
+                  {% elif field.name == 'last_name' %}
+                    <div class="input-group mb-2">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+                      </div>
+                      {{field}}
+                    </div>
+                  {% elif field.name == 'email' %}
+                    <div class="input-group mb-2">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                      </div>
+                      {{field}}
+                    </div>
+                  {% elif field.name == 'password1' %}
+                    <div class="input-group mb-2">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-key"></i></span>
+                      </div>
+                      {{field}}
+                      <div class="input-group-append">
+                        <span class="input-group-text" onclick="password_show_hide_1();">
+                          <i class="fas fa-eye" id="show_eye_1"></i>
+                          <i class="fas fa-eye-slash d-none" id="hide_eye_1"></i>
+                        </span>
+                      </div>
+                    </div>
+                  {% elif field.name == 'password2' %}
+                    <div class="input-group mb-2">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                      </div>
+                      {{field}}
+                      <div class="input-group-append">
+                        <span class="input-group-text" onclick="password_show_hide_2();">
+                          <i class="fas fa-eye" id="show_eye_2"></i>
+                          <i class="fas fa-eye-slash d-none" id="hide_eye_2"></i>
+                        </span>
+                      </div>
+                    </div>
+                  {% else %}
+                    {{ field }}
+                  {% endif %}
+									{% for error in field.errors %}
+										<div style="display:block" class="invalid-feedback">{{ error }}</div>
+									{% endfor %}
+								</div>
+							{% endfor %}
+						</div>
+
+						<hr class="my-4">
+
+            <!-- Form Submit -->
+						<div class="d-flex justify-content-center">
+							<button type="submit" class="col-md-3 btn btn-primary btn-block">Sign up</button>
+						</div>
+
+            <!-- Form Overlay -->
+            <div id="loading" class="overlay spanner">
+              <div class="loader"></div>
+              <p>Authentication is in progress please wait.</p>
+            </div>
+
+					</form>
+
+				</div>
+			</div>
+		</div>
+
+		<hr>
+
+	</div>
+	<!-- /container -->
+
+  {% endblock content %}
+
+
+{% block js %}
+  {{block.super}}
+
+  <script>
+    $(document).ready(function(){
+
+      // Form Overlay
+      $('form').on('submit', function(){
+        $('div#loading').addClass('show');
+        setTimeout(function() {
+          $('div#loading').removeClass('show');
+        }, 5000);
+      });
+
+    });
+  </script>
+
+  <!-- Show Hide Password -->
+  <script>
+
+    // Password
+    function password_show_hide_1() {
+      var x = document.getElementById("id_password1");
+      var show_eye = document.getElementById("show_eye_1");
+      var hide_eye = document.getElementById("hide_eye_1");
+      hide_eye.classList.remove("d-none");
+      if (x.type === "password") {
+        x.type = "text";
+        show_eye.style.display = "none";
+        hide_eye.style.display = "block";
+      } else {
+        x.type = "password";
+        show_eye.style.display = "block";
+        hide_eye.style.display = "none";
+      }
+    }
+
+    // Password Confirm
+    function password_show_hide_2() {
+      var x = document.getElementById("id_password2");
+      var show_eye = document.getElementById("show_eye_2");
+      var hide_eye = document.getElementById("hide_eye_2");
+      hide_eye.classList.remove("d-none");
+      if (x.type === "password") {
+        x.type = "text";
+        show_eye.style.display = "none";
+        hide_eye.style.display = "block";
+      } else {
+        x.type = "password";
+        show_eye.style.display = "block";
+        hide_eye.style.display = "none";
+      }
+    }
+
+  </script>
+
+{% endblock js %}

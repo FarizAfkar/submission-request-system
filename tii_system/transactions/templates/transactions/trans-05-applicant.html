@@ -1,0 +1,130 @@
+{% extends 'transactions/base-transactions.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %} {{ title }} {% endblock title %}
+
+
+{% block css %}
+  <style>
+
+    button#agree_submit:disabled,
+    button#agree_submit[disabled]{
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+    }
+
+  </style>
+{% endblock css %}
+
+
+{% block content %}
+
+	<!-- Main jumbotron for a primary marketing message or call to action -->
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item active" aria-current="page">Home</li>
+		</ol>
+	</nav>
+
+	<div class="container">
+		<!-- Applicant -->
+		<div class="row">
+			<div class="col-md-12">
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item">
+							<a href="{% url 'portalpages:home' %}">Home</a>
+						</li>
+						<li class="breadcrumb-item active" aria-current="page">
+							{% block menu %}{{ title }} {% endblock menu %}
+						</li>
+					</ol>
+				</nav>
+
+        {% include 'messages.html'%}
+
+				<div class="my-3 p-3 bg-white rounded shadow-sm">
+
+					<div class="track">
+						<div class="step active"> <span class="icon"> <i class="fas fa-check"></i> </span> <span class="text">Company in XA</span> </div>
+						<div class="step active"> <span class="icon"> <i class="fas fa-check"></i> </span> <span class="text">Company in XB</span> </div>
+						<div class="step active"> <span class="icon"> <i class="fa fa-address-card"></i> </span> <span class="text"> Applicant Detail </span> </div>
+					</div>
+
+					<h2 class="border-bottom border-gray pb-2 mb-0">
+					<center>{% block form_title %}{{ form_title }}{% endblock form_title %}</center>
+					</h2><br>
+
+					<p><b>{% block form_desc_title %}{{ form_desc_title }}{% endblock form_desc_title %}</b></p>
+
+					<small class="form-text text-muted">Please fill in detailed information of your applicant.</small></p>
+
+					<form method="POST" class="post-form" enctype="multipart/form-data">
+						{% csrf_token %}
+
+						<div class="form-group row">
+							<div class="col">
+								{{form.applicant_name | as_crispy_field}}
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col">
+								{{form.applicant_position | as_crispy_field}}
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col">
+								{{form.applicant_city | as_crispy_field}}
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col">
+								<input type="checkbox" id="understanding" required> By ticking the box, <i> I already fill and check the data and want to proceed the submission.</i>
+							</div>
+						</div>
+
+						<div class="d-flex justify-content-center">
+							<button id="agree_submit" class="col-md-3 btn btn-primary btn-block" disabled>Submit</button>
+              <div id="loading" class="overlay spanner">
+                <div class="loader"></div>
+                <p>Saving Form, please be patient.</p>
+              </div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /container -->
+
+{% endblock content %}
+
+
+{% block js %}
+  {{block.super}}
+
+  <script>
+    $(document).ready(function(){
+
+      // Form Overlay
+      $('form').on('submit', function(){
+        $('div#loading').addClass('show');
+        setTimeout(function() {
+          $('div#loading').removeClass('show');
+        }, 5000);
+      });
+
+      // Submit Process
+      $('#understanding').click(function(){
+        $('#agree_submit').prop('disabled', !$('#understanding').prop('checked'));
+      });
+
+    });
+  </script>
+
+{% endblock js %}

@@ -1,0 +1,135 @@
+{% extends 'controlpanels/base-cpanel.html' %}
+
+{% load group_filters %}
+
+{% load status_filters %}
+
+
+{% block css %}
+  <style>
+      
+    button#agree_submit:disabled,
+    button#agree_submit[disabled]{
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+    }
+
+  </style>
+{% endblock css %}
+
+
+{% block content %}
+
+  <div class="row">
+    <div class="col-md-12">
+
+      <div class="card bg-white rounded shadow-sm">
+        <h2 class="border-bottom border-gray pb-2 mb-0 card-header"><center> Reject Transaction {{trans.registration_code}}</center></h2>
+      </div>
+      
+      <div class="my-3 p-3 bg-white rounded shadow-sm">
+					
+        <small class="form-text text-muted">Please fill in detailed information of rejection. Minimum 10 characters</small></p>
+
+        <form method="POST" class="post-form" enctype="multipart/form-data">
+          {% csrf_token %}
+          
+          <div class="form-group">
+            <textarea class="form-control" id="rejection-note" name="rejection-note" rows="3" placeholder="Rejection Note" required></textarea>
+          </div>
+
+          <div class="form-group row">
+            <div class="col">
+              <input type="checkbox" id="understanding" required disabled> By ticking the box, <i> I already fill and check the data and want to proceed the rejection.</i>
+            </div>
+          </div>
+
+          <hr class="my-4">
+          
+          <div class="d-flex justify-content-around">
+
+            <div class="col-3">
+              <button type="button" class="btn btn-outline-primary btn-block" id="btn-back">Back</button>
+            </div>
+
+            <!-- Button trigger modal -->
+            <div class="col-3">
+              <button type="button" id="agree_submit" class="btn btn-outline-danger btn-block" data-toggle="modal" data-target="#modal-confirm-reject" disabled>Reject</button>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="modal-confirm-reject" tabindex="-1" role="dialog" aria-labelledby="modal-confirm-rejectTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="modal-confirm-rejectTitle">Reject Confirmation</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    Are you sure to Reject this Transaction?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-outline-danger btn-block" name="Reject" value="Reject">Yes</button>
+                    <button type="button" class="btn btn-outline-secondary btn-block" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          
+          <div id="loading" class="overlay spanner">
+            <div class="loader"></div>
+            <p>Saving Form, please be patient.</p>
+          </div>
+
+        </form>
+
+			</div>
+
+    </div>
+  </div>
+
+{% endblock content %}
+
+
+{% block js %}
+  {{block.super}}
+  
+  <script>
+    $(document).ready(function(){
+
+      // Back
+      $('#btn-back').on('click', function(){
+        window.location.replace("{% url 'c-panels:approval-transaction' trans.registration_code %}");
+      });
+
+      // Form Overlay
+      $('form').on('submit', function(){
+        $('div#loading').addClass('show');
+        setTimeout(function() {
+          $('div#loading').removeClass('show');
+        }, 5000);
+      });
+
+      // Disabled Agreement
+      $('#rejection-note').on('input keyup keydown copy pase', function(){
+        if ($(this).val().length > 10 ){
+          $('#understanding').prop('disabled', false);
+        }else{
+          $('#understanding').prop('disabled', true);
+        }
+      });
+
+      // Submit Process
+      $('#understanding').click(function(){
+        $('#agree_submit').prop('disabled', !$('#understanding').prop('checked'));
+      });
+
+    });
+  </script>
+
+{% endblock js %}

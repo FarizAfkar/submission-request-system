@@ -1,0 +1,130 @@
+{% extends 'portalpages/base_x.html' %}
+
+{% block title %} {{ title }} {% endblock title %}
+
+
+{% block css %}
+  <style>
+    p {
+      text-align: justify;
+    }
+
+    ol li {
+      text-align: justify;
+    }
+  </style>
+{% endblock css %}
+
+
+{% block content %}
+
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+  <div class="container" style="margin-top:5rem">
+
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'portalpages:home' %}">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Representative</li>
+      </ol>
+    </nav>
+
+    <!-- Opening Representative -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="my-3 p-3 bg-white rounded shadow-sm">
+          <h2 class="border-bottom border-gray pb-2 mb-0"><center>Opening Representative</center></h2>
+
+          <p><br>
+            In tempor, lorem eu fringilla donec.<br>
+            No.: 00/X-XXX/xxx/X/XXXX and<br>
+            No.: 00/X-XXX/xxx/XXXX<br>
+
+            <h5 class="border-bottom border-gray pb-2 mb-0">Required Document:</h5>
+            <ol>
+              <li>
+                Maecenas feugiat semper fermentum. Donec ac massa non leo suscipit vulputate. Ut at;
+              </li>
+              <li>
+                Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce ligula;
+              </li>
+              <li>
+                Donec massa eros, viverra at nisi eget, faucibus fermentum lectus. Curabitur vel mi leo. Mauris quis dui ut;
+              </li>
+              <div class="alert alert-warning" role="alert">
+                <h4 class="alert-heading">Note:</h4>
+                <p>Duis rhoncus, ex quis elementum malesuada, est ligula pulvinar diam, ut sagittis nisl ex et sem. Suspendisse potenti. Pellentesque dignissim mi eget interdum porta. Duis at ipsum a massa lobortis porta ante.</p>
+                <hr>
+                <p class="mb-0"><a href="{% url 'portalpages:home' %}" target="_blank">https://example.html</a></p>
+              </div>
+              <li>
+                Donec porta justo non nulla laoreet luctus quis eu dui. Integer accumsan nec enim sit amet varius. Donec et;
+              </li>
+              <li>
+                Vestibulum nisi massa, efficitur vitae pretium in, bibendum ut dui. Aliquam tempor pulvinar risus, at suscipit risus tempor ac. Sed ultricies non justo ac erat curae.
+              </li>
+            </ol>
+
+            <h5 class="border-bottom border-gray pb-2 mb-0">Procedure</h5>
+            Suspendisse ut velit et elit sodales dictum. Ut eu
+            <ol>
+              <li>
+                Praesent venenatis ultrices lobortis. Nam diam tortor, pellentesque sit amet sem et, condimentum condimentum lacus. Morbi non sodales velit, eget tempus risus. Proin volutpat eros eu velit rutrum varius. Mauris mollis pulvinar purus. Nulla convallis nullam.
+              </li>
+              <li>
+                Aenean sagittis dolor et metus sodales rutrum. Cras ultricies, enim vitae vulputate laoreet.
+              </li>
+              <li>
+                Curabitur venenatis tincidunt facilisis. Sed quis:
+                <ul>
+                  <li>
+                    Nunc ornare libero non nulla lacinia eleifend. Sed lacinia augue quis nibh porta accumsan. Phasellus metus dolor, maximus ex.
+                  </li>
+                  <li>
+                    Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Phasellus quis est iaculis, maximus nisi sed, tristique ligula. Pellentesque lacinia libero at nisl ut.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Morbi congue neque mi, nec auctor diam mollis ac. Aenean non eros neque. Vivamus consectetur feugiat congue. In eget dolor lectus. Nullam ultrices erat mauris, vel sodales dolor volutpat in. Cras vehicula purus id commodo sagittis. Phasellus pharetra lobortis neque a iaculis. Donec molestie viverra.
+              </li>
+            </ol>
+
+            Fusce tortor ipsum, molestie quis accumsan nisi:<BR>
+            <address>
+            Donec id ante odio<br>
+            Quisque pulvinar nec<br>
+            Nunc feugiat ante erat augue<br>
+            Duis mattis sem duis<br>
+            <br><br>
+            Quisque venenatis faucibus ex id cursus. Ut nulla:<br>
+            Donec id ante odio Office at: XXX-XXX-XXXX, or<br>
+            Email: example@email.com and example@email.com
+            </address>
+          </p>
+
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+  </div>
+	<!-- /container -->
+
+{% endblock content %}
+
+
+{% block js %}
+  {{block.super}}
+
+  <script>
+    $(document).ready(function(){
+
+      // Nav Active
+      $('#nav-home').addClass('active')
+
+    });
+  </script>
+
+{% endblock js %}
