@@ -124,6 +124,8 @@ media/
 !**/migrations
 !**/migrations/__init__.py
 
-AtdagWDC DB v 1.1
+AtdagWDC DB v 1.1.SQL
 AtdagWDC DB v 1.2
 AtdagWDC DB v 1.3
+
+/tii_system/.env
